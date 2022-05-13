@@ -13,9 +13,10 @@ class UsersController < ApplicationController
       # 保存の成功をここで扱う。
       redirect_to @user
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
+
     private
 
     def user_params
