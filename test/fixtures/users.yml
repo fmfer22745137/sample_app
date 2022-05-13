@@ -1,1 +1,4 @@
-
+fmf:
+  name: FMF
+  email: root@yourpc.com
+  password_digest: <%= User.digest('password') %>
