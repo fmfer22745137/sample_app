@@ -7,6 +7,8 @@ ruby "2.7.5"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "jquery-rails"
+gem "jquery-ui-rails"
 gem "sprockets-rails"
 
 
