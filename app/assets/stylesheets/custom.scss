@@ -4,6 +4,7 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+$gray-lighter: #fefefe;
 
 @mixin box_sizing {
   background-color: $gray-medium-light;
@@ -180,5 +181,17 @@ input {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
+  }
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
   }
 }
