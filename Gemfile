@@ -10,6 +10,7 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "sprockets-rails"
+gem "faker"
 
 
 # Use the Puma web server [https://github.com/puma/puma]
