@@ -11,12 +11,14 @@
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
-             password_confirmation: "foobar")
+             password_confirmation: "foobar",
+             admin: true)
 
 User.create!(name:  "FMF",
              email: "root@yourpc.now",
              password:              "holahola",
-             password_confirmation: "holahola")
+             password_confirmation: "holahola",
+             admin: true)
 
 
 # 追加のユーザーをまとめて生成する
