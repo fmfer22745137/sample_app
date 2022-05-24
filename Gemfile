@@ -10,7 +10,10 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "sprockets-rails"
+gem "faker"
 
+gem 'will_paginate',           '3.3.1'
+gem 'bootstrap-will_paginate', '1.0.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
