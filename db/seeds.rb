@@ -32,3 +32,11 @@ User.create!(name:  "FMF",
                password_confirmation: password)
 
 end
+
+# ユーザーの一部を対象にマイクロポストを生成する
+users = User.order(:created_at).take(6)
+
+f = Faker::ChuckNorris.unique
+50.times do
+  users.each { |user| user.microposts.create!(content: f.fact.first(140)) }
+end
