@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FMF&#39;s Sample App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    
+
+    <link rel="stylesheet" href="/assets/application-5bf10e40e07e1e6f5f325e43e5a63f2a2184aec036fa6ee5ee33121408427396.css" data-turbo-track="reload" />
+    <script type="importmap" data-turbo-track="reload">{
+  "imports": {
+    "application": "/assets/application-7529652a4c25d710ca364ef23a455f41f52bb8df342327b096859f7153159e10.js",
+    "@hotwired/turbo-rails": "/assets/turbo.min-96cbf52c71021ba210235aaeec4720012d2c1df7d2dab3770cfa49eea3bb09da.js",
+    "@hotwired/stimulus": "/assets/stimulus.min-900648768bd96f3faeba359cf33c1bd01ca424ca4d2d05f36a5d8345112ae93c.js",
+    "@hotwired/stimulus-loading": "/assets/stimulus-loading-1fc59770fb1654500044afd3f5f6d7d00800e5be36746d55b94a2963a7a228aa.js",
+    "controllers": "/assets/controllers/index-2db729dddcc5b979110e98de4b6720f83f91a123172e87281d5a58410fc43806.js",
+    "controllers/application": "/assets/controllers/application-368d98631bccbf2349e0d4f8269afb3fe9625118341966de054759d96ea86c7e.js",
+    "controllers/hello_controller": "/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js"
+  }
+}</script>
+<link rel="modulepreload" href="/assets/application-7529652a4c25d710ca364ef23a455f41f52bb8df342327b096859f7153159e10.js">
+<link rel="modulepreload" href="/assets/turbo.min-96cbf52c71021ba210235aaeec4720012d2c1df7d2dab3770cfa49eea3bb09da.js">
+<link rel="modulepreload" href="/assets/stimulus.min-900648768bd96f3faeba359cf33c1bd01ca424ca4d2d05f36a5d8345112ae93c.js">
+<link rel="modulepreload" href="/assets/stimulus-loading-1fc59770fb1654500044afd3f5f6d7d00800e5be36746d55b94a2963a7a228aa.js">
+<script src="/assets/es-module-shims.min-8b21b40925fc92896e87358f40a2a8aaea6bf306b34ee4a215ec09c59c6cb3ba.js" async="async" data-turbo-track="reload"></script>
+<script type="module">import "application"</script>
+    <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+  </script>
+<![endif]-->
+
+
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <a id="logo" href="/">sample app</a>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/">Home</a></li>
+        <li><a href="/help">Help</a></li>
+          <li><a href="/users">Users</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/users/127516426">Profile</a></li>
+              <li><a href="/users/127516426/edit">Settings</a></li>
+              <li class="divider"></li>
+              <li>
+                <a rel="nofollow" data-method="delete" href="/logout">Log out</a>
+              </li>
+            </ul>
+          </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+    <!--header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <a id="logo" href="#">FMF&#39;s Sample App</a>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Log in</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header-->
+    <div class="container">
+        <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+<h1>FMF</h1>
+<span><a href="/users/127516426">view my profile</a></span>
+<span>34 microposts</span>
+
+      </section>
+      <section class="stats">
+        <div class="stats">
+  <a href="/users/127516426/following">
+    <strong id="following" class="stat">
+      2
+    </strong>
+    following
+  </a>
+  <a href="/users/127516426/followers">
+    <strong id="followers" class="stat">
+      2
+    </strong>
+    followers
+  </a>
+</div>
+
+      </section>      
+      <section class="micropost_form">
+        <form enctype="multipart/form-data" action="/microposts" accept-charset="UTF-8" method="post">
+  
+
+  <div class="field">
+    <textarea placeholder="Compose new micropost..." name="micropost[content]" id="micropost_content">
+</textarea>
+  </div>
+  <input type="submit" name="commit" value="Post" class="btn btn-primary" data-disable-with="Post" />
+  <span class="image">
+    <input accept="image/jpeg,image/gif,image/png" type="file" name="micropost[image]" id="micropost_image" />
+  </span>  
+</form>
+<script type="text/javascript">
+  $("#micropost_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert("Maximum file size is 5MB. Please choose a smaller file.");
+      $("#micropost_image").val("");
+    }
+  });
+</script>
+
+
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Micropost Feed</h3>
+        <ol class="microposts">
+    <li id="micropost-941832919">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Writing a short test
+    
+  </span>  
+  <span class="timestamp">
+    Posted less than a minute ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/941832919">delete</a>
+  </span>
+</li>
+<li id="micropost-3454773">
+  <a href="/users/409608538"><img alt="Lana" class="gravatar" src="https://secure.gravatar.com/avatar/3ce4276cc844cfad200263d63e553af7?s=50" /></a>
+  <span class="user"><a href="/users/409608538">Lana</a></span>
+  <span class="content">
+    I&#39;m sorry. Your words made sense, but your sarcastic tone did not.
+    
+  </span>  
+  <span class="timestamp">
+    Posted 10 minutes ago.
+  </span>
+</li>
+<li id="micropost-499495288">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    I just ate an orange!
+    
+  </span>  
+  <span class="timestamp">
+    Posted 10 minutes ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/499495288">delete</a>
+  </span>
+</li>
+<li id="micropost-12348100">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Sad cats are sad: https://youtu.be/PKffm2uI4dk
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 2 hours ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/12348100">delete</a>
+  </span>
+</li>
+<li id="micropost-970054474">
+  <a href="/users/409608538"><img alt="Lana" class="gravatar" src="https://secure.gravatar.com/avatar/3ce4276cc844cfad200263d63e553af7?s=50" /></a>
+  <span class="user"><a href="/users/409608538">Lana</a></span>
+  <span class="content">
+    Dude, this van&#39;s, like, rolling probable cause.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 4 hours ago.
+  </span>
+</li>
+<li id="micropost-19959062">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Aut quod alias voluptas animi.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/19959062">delete</a>
+  </span>
+</li>
+<li id="micropost-58620899">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Sunt hic magni in distinctio.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/58620899">delete</a>
+  </span>
+</li>
+<li id="micropost-68403196">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ut aliquid repudiandae dolorem quo.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/68403196">delete</a>
+  </span>
+</li>
+<li id="micropost-71534927">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ab non quae architecto et.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/71534927">delete</a>
+  </span>
+</li>
+<li id="micropost-106776847">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Asperiores et ut provident voluptas.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/106776847">delete</a>
+  </span>
+</li>
+<li id="micropost-177734013">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Aut unde dolorem ut at.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/177734013">delete</a>
+  </span>
+</li>
+<li id="micropost-228979669">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ullam iusto magnam ipsam sint.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/228979669">delete</a>
+  </span>
+</li>
+<li id="micropost-234210660">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Natus est adipisci rem pariatur.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/234210660">delete</a>
+  </span>
+</li>
+<li id="micropost-294621321">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ut quae illum aliquid incidunt.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/294621321">delete</a>
+  </span>
+</li>
+<li id="micropost-328290505">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ut laboriosam cumque voluptas commodi.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/328290505">delete</a>
+  </span>
+</li>
+<li id="micropost-352097504">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Esse adipisci earum at nisi.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/352097504">delete</a>
+  </span>
+</li>
+<li id="micropost-406445230">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Voluptatem nulla eos praesentium iure.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/406445230">delete</a>
+  </span>
+</li>
+<li id="micropost-444017243">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Doloremque laboriosam eos libero sit.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/444017243">delete</a>
+  </span>
+</li>
+<li id="micropost-488304196">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Ratione non ut adipisci quisquam.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/488304196">delete</a>
+  </span>
+</li>
+<li id="micropost-525605047">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Tenetur animi aliquam nihil quod.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/525605047">delete</a>
+  </span>
+</li>
+<li id="micropost-603694155">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Culpa fugit id sint autem.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/603694155">delete</a>
+  </span>
+</li>
+<li id="micropost-613834836">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Aliquam minima tempora dolorum nesciunt.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/613834836">delete</a>
+  </span>
+</li>
+<li id="micropost-646488084">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Velit illo eum cum excepturi.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/646488084">delete</a>
+  </span>
+</li>
+<li id="micropost-676538406">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Fugiat quis officiis facilis modi.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/676538406">delete</a>
+  </span>
+</li>
+<li id="micropost-706600661">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Quae voluptate sequi dolore omnis.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/706600661">delete</a>
+  </span>
+</li>
+<li id="micropost-762321612">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Architecto neque ut iure sed.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/762321612">delete</a>
+  </span>
+</li>
+<li id="micropost-792652861">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Adipisci rem fugit atque aperiam.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/792652861">delete</a>
+  </span>
+</li>
+<li id="micropost-828012954">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Quis et omnis distinctio explicabo.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/828012954">delete</a>
+  </span>
+</li>
+<li id="micropost-856985457">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Et aliquid illo et corporis.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/856985457">delete</a>
+  </span>
+</li>
+<li id="micropost-860142042">
+  <a href="/users/127516426"><img alt="FMF" class="gravatar" src="https://secure.gravatar.com/avatar/3bd2c64ce901ad259faee2aca16081fa?s=50" /></a>
+  <span class="user"><a href="/users/127516426">FMF</a></span>
+  <span class="content">
+    Sapiente omnis mollitia et fuga.
+    
+  </span>  
+  <span class="timestamp">
+    Posted about 1 month ago.
+      <a data-confirm="You sure?" rel="nofollow" data-method="delete" href="/microposts/860142042">delete</a>
+  </span>
+</li>
+
+  </ol>
+  <div role="navigation" aria-label="Pagination" class="pagination"><ul class="pagination"><li class="prev previous_page disabled"><a href="#">&#8592; Previous</a></li> <li class="active"><a href="/?page=1">1</a></li> <li><a rel="next" href="/?page=2">2</a></li> <li class="next next_page "><a rel="next" href="/?page=2">Next &#8594;</a></li></ul></div>  
+
+
+    </div>    
+  </div>
+
+      <footer class="footer">
+  <small>
+    Thanks for visiting!
+    The <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
+    by <a href="https://www.michaelhartl.com/">Michael Hartl</a>
+  </small>
+  <nav>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="https://news.railstutorial.org/">News</a></li>
+    </ul>
+  </nav>
+</footer>
+
+      
+    </div>
+  </body>
+</html>
