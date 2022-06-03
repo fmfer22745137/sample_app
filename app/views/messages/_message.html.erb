@@ -1,23 +1,23 @@
 <li id="message-<%= message.id %>">
-
-  <% if @type_id == :sent %>
-  <span class="sender">
-    <%= link_to gravatar_for(message.to, size: 50), message.to %>
-    <span class="user-to"><%= link_to message.to.name, message.to %></span>
-  </span>
-  <% else %>
-  <span class="recipient">
-    <%= link_to gravatar_for(message.from, size: 50), message.to %>
+  <section>
+    <span class="sender">
+      FROM: <%= link_to gravatar_for(message.from, size: 10), message.to %>
     <span class="user-from"><%= link_to message.from.name, message.from %></span>
-  </span>
-  <% end %>
-  <span class="content">
-    <%= message.body %>
-  </span>  
-  <span class="timestamp">
-    Sent at <%= time_ago_in_words(message.created_at) %> ago.
-  </span>
-  <% if message.from != current_user %>
-    <span class="user-to"><%= link_to "返信する", messages_create_path(message: { to_id: message.from_id }), method: :post %></span>
-  <% end %>
+    </span>
+  </section>
+  <section>
+    <span class="recipient">
+      TO: <%= link_to gravatar_for(message.to, size: 10), message.to %>
+    <span class="user-to"><%= link_to message.to.name, message.to %></span>
+    </span>
+    <span class="content">
+      <%= message.body %>
+    </span>  
+    <span class="timestamp">
+      Sent at <%= time_ago_in_words(message.created_at) %> ago.
+    </span>
+    <% if message.from != current_user %>
+      <span class="respond"><%= link_to "返信する", messages_create_path(message: { to_id: message.from_id }), method: :post %></span>
+    <% end %>
+  </section>
 </li>
