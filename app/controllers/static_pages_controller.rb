@@ -6,6 +6,21 @@ class StaticPagesController < ApplicationController
     end    
   end
 
+  def search
+    keyword = params[:keyword]
+    comparer = "COLLATE utf8_unicode_ci LIKE"
+    if Rails.env == "production"
+      comparer = "ILIKE"
+    end
+    all_users = User.where("name #{comparer} ?", "%#{keyword}%")
+    @all_users_cnt = all_users.size
+    @users = all_users.paginate(page: params[:page], per_page: 5)
+
+    all_microposts = Micropost.where("content #{comparer} ?", "%#{keyword}%")
+    @all_microposts_cnt = all_microposts.size
+    @microposts = all_microposts.paginate(page: params[:page], per_page: 15)
+  end
+
   def help
   end
 
