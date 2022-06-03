@@ -1,5 +1,5 @@
 <% provide(:title, 'Search results') %>
-<h2>Users</h2>
+<h2>Users (<%= @all_users_cnt %>)</h2>
 
 <ul class="users">
   <%= render @users %>
@@ -7,7 +7,7 @@
 
 <%= will_paginate @users %>
 
-<h2>Microposts</h2>
+<h2>Microposts (<%= @all_microposts_cnt %>)</h2>
 
 <ul class="microposts">
   <%= render @microposts %>
