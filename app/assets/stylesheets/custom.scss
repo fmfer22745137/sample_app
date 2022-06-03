@@ -267,6 +267,34 @@ input {
   }
 }
 
+/* search */
+
+.searchform {
+  display: inline;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  #keyword {
+     display: inline;
+     width: 20em;
+     height: 2.5em!important;
+     margin-top: 8px;
+     margin-bottom: 8px;
+  }
+  .btn {
+     display: inline;
+     width: 10em!important;
+     height: 2.5em!important;
+     margin: 8px;
+  }
+}
+
+.container {
+  nav {
+    display: inline;
+  }
+}
+
 aside {
   textarea {
     height: 100px;
