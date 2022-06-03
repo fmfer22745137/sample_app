@@ -15,7 +15,12 @@ Rails.application.routes.draw do
     end
   end  
 
+  get '/messages/sent', to: 'messages#sent'
+  get '/messages/received', to: 'messages#received'
+  post '/messages/create', to: 'messages#create'
+  
   resources :users
+  resources :messages
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   

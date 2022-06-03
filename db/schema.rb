@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_02_023552) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_02_133518) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_02_023552) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "from_id"
+    t.integer "to_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id", "to_id"], name: "index_messages_on_from_id_and_to_id"
+    t.index ["to_id", "from_id"], name: "index_messages_on_to_id_and_from_id"
   end
 
   create_table "microposts", force: :cascade do |t|

@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  
+  has_many :messages_sent,    class_name: "Message", dependent: :destroy, foreign_key: "from_id"
+  has_many :messages_received,  class_name: "Message", dependent: :destroy, foreign_key: "to_id"
+
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy  
@@ -36,6 +40,17 @@ class User < ApplicationRecord
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
+
+  # 送信箱
+  def outbox
+    messages_sent.order(created_at: :desc)
+  end
+
+  # 受信箱
+  def inbox
+    messages_received.order(created_at: :desc)
+  end
+
   # ユーザーをフォローする
   def follow(other_user)
     following << other_user
