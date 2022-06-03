@@ -1,0 +1,12 @@
+<% provide(:title, 'All your messages') %>
+<h1><%= @type_name %></h1>
+
+<%= will_paginate %>
+
+<ul class="messages">
+  <%= render @messages %>
+</ul>
+
+<%= will_paginate %>
+
+

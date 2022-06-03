@@ -10,6 +10,11 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>    
+    <% if @user != current_user %>
+      <section class="sub-message-form">
+        <span class="user-to"><%= link_to "メッセージを送る", messages_create_path(message: { to_id: @user.id }), method: :post %></span>
+      </section>
+    <% end %>
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>    

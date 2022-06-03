@@ -4,5 +4,7 @@
   <% if current_user.admin? && !current_user?(user) %>
   | 
   <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
+  |
+  <%= link_to "メッセージを送る", messages_create_path(message: { to_id: user.id }), method: :post %>
   <% end %>
 </li>

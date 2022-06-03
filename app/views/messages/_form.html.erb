@@ -1,0 +1,14 @@
+<%= form_with(model: @message, local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :to_id, value: @message.to_id, required: true,  readonly: true, hidden: true %>
+
+  <div class="field">
+  </div>
+  <div class="field">
+    <%= f.text_area :body, placeholder: "Compose new message..." %>
+  </div>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+</script>
+
