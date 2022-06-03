@@ -20,7 +20,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     assert_select 'input[id="keyword"]'    
 
     # あるものを検索
-    get search_path, params: { keyword: @other.name } 
+    get search_path, params: { keyword: @other.name.upcase } 
     assert_match "Users (1)", response.body
     assert_match "Microposts (0)", response.body
     
